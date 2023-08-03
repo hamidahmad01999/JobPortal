@@ -1,0 +1,50 @@
+{% extends '../base.html' %}
+{% block content %}
+    <div class="container">
+        <div class="row job_detail d-flex justify-content-center" style="margin-bottom: 30px;">
+            {% if job %}
+                <div class="col-md-10 job_detail_area ">
+                    <div class="col-md-12 top px-3 mt-4" style="display: flex; justify-content:space-between;">
+                        <div class="top_left">
+                            <h4>{{job.jobTitle}}</h4>
+                            <small><b>Job Type:</b> {{job.jobType}}</small> &nbsp; <small><b>Job Role:</b> {{job.jobLevel}}</small>
+                        </div>
+                        <button class="btn btn-primary"><a href="" style="color: white; text-decoration: none;">Apply Now</a></button>
+                    </div>
+                </div>
+                <div class="col-md-8 mt-4 job_personal_information" style="border: 2px solid black; border-radius: 10px;">
+                    <div class="job_personal_information_left" style="display: flex; flex-direction: column; justify-content: space-between; height: 100px;">
+                        <small><b>Salary:</b>{% if job.salaryRange %} {{job.salaryRange}}$ {% endif %}</small>
+                        <small><b>Job Type:</b> {{job.jobType}}</small>
+                        <small><b>Location:</b> {{job.jobLocation}}</small>
+                    </div>
+                </div>
+                <div class="col-md-8 job_description mt-3">
+                    <h3>Job Description:</h3>
+                    <p>
+                        {{job.jobDescription}}
+                    </p>
+                </div>
+                <div class="col-md-8 company_description mt-3">
+                    <h3>Company Description:</h3>
+                    <p>
+                        {{job.companyDescription}}
+                    </p>
+                </div>
+                <div class="col-md-8 company_description mt-3">
+                    <h3>Require Skills:</h3>
+                    <p>
+                        {{job.skillsRequirement}}
+                    </p>
+                </div>
+                <div class="col-md-8 company_description mt-3">
+                    <h3>Education Requirement:</h3>
+                    <p>
+                        {{job.educationRequirement}}
+                    </p>
+                </div>
+            {% endif %}
+            
+        </div>
+    </div>
+{% endblock  %}

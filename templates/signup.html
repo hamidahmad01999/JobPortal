@@ -1,0 +1,31 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container mt-3 my-2">
+    <div class="row signup_cont d-flex justify-content-center">
+        <div class="col-md-6 singup_area">
+            <form action="/createuser" class="signup_form" method="post">
+                {% csrf_token %}
+                <div class="signup_form_item my-2">
+                    <div class="form-label">Name:</div>
+                    <input type="text" class="form-control" name="name" placeholder="Enter your name">
+                </div>
+                <div class="signup_form_item my-2">
+                    <div class="form-label">Email:</div>
+                    <input type="email" class="form-control" name="email" placeholder="Enter your email">
+                </div>
+                <div class="signup_form_item my-2">
+                    <div class="form-label">Password:</div>
+                    <input type="password" class="form-control" name="password" placeholder="Enter your password">
+                </div>
+                <div class="signup_form_item my-2">
+                    <button class="btn btn-primary">Sign Up</button>
+                </div>
+            </form>
+            {% if messages %} {% for message in messages %}
+            <p>
+                {{ message }}
+            </p>
+            {% endfor %} {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

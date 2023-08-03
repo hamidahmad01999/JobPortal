@@ -1,0 +1,24 @@
+{% extends '../base.html'%} 
+{% block content %}
+<div class="container">
+    <div class="row d-flex justify-content-center createjob_container">
+        <div class="col-md-12 createjob_area mt-3">
+            <h1>Post your Job here!</h1>
+            {% if messages %}
+                {% for message in messages %}
+                    <p>{{message}}</p>
+                {% endfor %}
+            {% endif %}
+            <form action="/createjob/postjob" method="post" class="createjob_form my-2" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{form.as_p}}
+                
+                <div class="createjob_form_btn">
+                    <button type="submit" class="btn btn-primary py-2 px-3">Post Job</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

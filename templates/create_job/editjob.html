@@ -1,0 +1,77 @@
+{% extends '../base.html'%} {% block content %}
+<div class="container">
+    <div class="row d-flex justify-content-center createjob_container">
+        <div class="col-md-12 createjob_area mt-3">
+            <h1>Edit your Job here!</h1>
+            {% if messages %}
+                {% for message in messages %}
+                    <p>{{message}}</p>
+                {% endfor %}
+            {% endif %}
+            {% if job %}
+            {{job.postJobSlug}}
+            <form action="/job/edited/{{job.postJobSlug}}/" method="post" class="createjob_form my-2">
+                {% csrf_token %}
+                
+                <div class="createjob_form_item my-2">
+                    <label class="form-label" for="job_title">Job Title</label>
+                    <input type="text" value="{{job.jobTitle}}" name="job_title" class="form-control" placeholder="Job Title!">
+                </div>
+                <div class="createjob_form_item my-2">
+                    <label class="form-label" for="job_description">Job Description</label>
+                    <textarea name="job_description"  id="" cols="30" rows="5" placeholder="Enter Job Description!">{{job.jobDescription}}</textarea>
+                </div>
+                <div class="createjob_form_item my-2">
+                    <label class="form-label" for="skills_require">Skills Requirement</label>
+                    <textarea name="skills_requirement" id="" cols="30" rows="5" placeholder="Enter Skills Require!">{{job.skillsRequirement}}</textarea>
+                </div>
+                <div class="createjob_form_item my-2">
+                    <label class="form-label" for="experience_require">Experience Requirement</label>
+                    <textarea name="experience_requirement" id="" cols="30" rows="5" placeholder="Enter Skills Require!">{{job.experienceRequirement}}</textarea>
+                </div>
+                <div class="createjob_form_item my-2">
+                    <label class="form-label" for="job_title">Education Requirement</label>
+                    <textarea name="education_requirement" id="" cols="30" rows="5" placeholder="Enter Skills Require!">{{job.skillsRequirement}}</textarea>
+                </div>
+                <div class="createjob_form_item my-2">
+                    <label class="form-label" for="job_location">Job Location</label>
+                    <input value="{{job.jobLocation}}" type="text" name="job_location" class="form-control" placeholder="Job Location!">
+                </div>
+                <div class="createjob_form_item my-2">
+                    <label class="form-label" for="salary_range">Salary Range</label>
+                    <input value="{{job.salaryRange}}" type="number" name="salary_range" class="form-control" placeholder="Salary Range!">
+                </div>
+                <div class="createjob_form_item my-2">
+                    <label class="form-label" for="company_name">Company Name</label>
+                    <input value="{{job.companyName}}" type="text" name="company_name" class="form-control" placeholder="Company Name!">
+                </div>
+                <div class="createjob_form_item my-2">
+                    <label class="form-label" for="job_type">Job Type</label>
+                    <select value="{{job.jobType}}" name="job_type" id="" class="form-control">
+                        <option value="Internship">Internship</option>
+                        <option value="Part Time">Part Time</option>
+                        <option value="Full Time" selected>Full Time</option>
+                    </select>
+                </div>
+                <div class="createjob_form_item my-2">
+                    <label class="form-label" for="job_level">Job Level</label>
+                    <select value="{{job.jobLevel}}" name="job_level" id="job_level" class="form-control">
+                        <option value="Beginner">Beginner</option>
+                        <option value="Intermediate" selected>Intermediate</option>
+                        <option value="Advanced">Advanced</option>
+                    </select>
+                </div>
+                <div class="createjob_form_item my-2">
+                    <label class="form-label" for="company_description">Company Description</label>
+                    <input value="{{job.companyDescription}}" type="text" name="company_description" class="form-control" placeholder="Company Description!">
+                </div>
+                <div class="createjob_form_btn">
+                    <button type="submit" class="btn btn-primary py-2 px-3">Update Job</button>
+                </div>
+            </form>
+            {% endif  %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

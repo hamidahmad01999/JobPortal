@@ -1,0 +1,198 @@
+{% extends '../base.html' %}
+{% block content %}
+{% load static %}
+    <div class="container">
+        <div class="row d-flex justify-content-center employee_container">
+            <div class="col-md-10 employee_area">
+                <h3 class="text-center">Create Your Profile for Job.</h3>
+                {% if messages %}
+                    {% for message in messages %}
+                        {{message}}</h3>
+                    {% endfor %}
+                {% endif %}
+                    <form action="/saveemployee/" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{form.as_p}}
+                        {% comment %} {{form2}} {% endcomment %}
+                        <div class="">
+                            
+<script src="/static/multiselect-dropdown.js"></script>
+<label for="skills">Skills</label>
+<select class="form-control my-3" name="employeeSkills" id="cars" multiple multiselect-search="true">
+    <option value="HTML">HTML</option>
+    <option value="CSS">CSS</option>
+    <option value="JavaScript">JavaScript</option>
+    <option value="Python">Python</option>
+    <option value="Java">Java</option>
+    <option value="C#">C#</option>
+    <option value="PHP">PHP</option>
+    <option value="SQL">SQL</option>
+    <option value="Node.js">Node.js</option>
+    <option value="React">React</option>
+    <option value="Angular">Angular</option>
+    <option value="Vue.js">Vue.js</option>
+    <option value="TypeScript">TypeScript</option>
+    <option value="Ruby">Ruby</option>
+    <option value="Swift">Swift</option>
+    <option value="Kotlin">Kotlin</option>
+    <option value="C">C</option>
+    <option value="C++">C++</option>
+    <option value="R">R</option>
+    <option value="Shell scripting">Shell scripting</option>
+    <option value="Git">Git</option>
+    <option value="Docker">Docker</option>
+    <option value="Kubernetes">Kubernetes</option>
+    <option value="Amazon Web Services (AWS)">Amazon Web Services (AWS)</option>
+    <option value="Microsoft Azure">Microsoft Azure</option>
+    <option value="Google Cloud Platform (GCP)">Google Cloud Platform (GCP)</option>
+    <option value="Networking">Networking</option>
+    <option value="Cybersecurity">Cybersecurity</option>
+    <option value="Data Analysis">Data Analysis</option>
+    <option value="Machine Learning">Machine Learning</option>
+    <option value="Artificial Intelligence">Artificial Intelligence</option>
+    <option value="Data Science">Data Science</option>
+    <option value="Databases">Databases</option>
+    <option value="Ruby on Rails">Ruby on Rails</option>
+    <option value="Django">Django</option>
+    <option value="Flask">Flask</option>
+    <option value="Spring Framework">Spring Framework</option>
+    <option value="Hibernate">Hibernate</option>
+    <option value="Express.js">Express.js</option>
+    <option value="NestJS">NestJS</option>
+    <option value="Go (Golang)">Go (Golang)</option>
+    <option value="Rust">Rust</option>
+    <option value="Scala">Scala</option>
+    <option value="Haskell">Haskell</option>
+    <option value="Erlang">Erlang</option>
+    <option value="Lua">Lua</option>
+    <option value="Bash scripting">Bash scripting</option>
+    <option value="PowerShell">PowerShell</option>
+    <option value="MongoDB">MongoDB</option>
+    <option value="MySQL">MySQL</option>
+    <option value="PostgreSQL">PostgreSQL</option>
+    <option value="Oracle">Oracle</option>
+    <option value="NoSQL databases">NoSQL databases</option>
+    <option value="Big Data">Big Data</option>
+    <option value="Apache Spark">Apache Spark</option>
+    <option value="Apache Hadoop">Apache Hadoop</option>
+    <option value="TensorFlow">TensorFlow</option>
+    <option value="Keras">Keras</option>
+    <option value="PyTorch">PyTorch</option>
+    <option value="scikit-learn">scikit-learn</option>
+    <option value="NLTK">NLTK</option>
+    <option value="OpenCV">OpenCV</option>
+    <option value="Unity">Unity</option>
+    <option value="Unreal Engine">Unreal Engine</option>
+    <option value="Agile Development">Agile Development</option>
+    <option value="DevOps">DevOps</option>
+    <option value="Continuous Integration (CI)">Continuous Integration (CI)</option>
+    <option value="Continuous Deployment (CD)">Continuous Deployment (CD)</option>
+    <option value="Jenkins">Jenkins</option>
+    <option value="Ansible">Ansible</option>
+    <option value="Puppet">Puppet</option>
+    <option value="Chef">Chef</option>
+    <option value="Terraform">Terraform</option>
+    <option value="Azure DevOps">Azure DevOps</option>
+    <option value="GitLab">GitLab</option>
+    <option value="SonarQube">SonarQube</option>
+    <option value="Kibana">Kibana</option>
+    <option value="Grafana">Grafana</option>
+    <option value="Splunk">Splunk</option>
+    <option value="Bootstrap">Bootstrap</option>
+    <option value="Tailwind CSS">Tailwind CSS</option>
+    <option value="Material UI">Material UI</option>
+    <!-- Mobile Development -->
+<option value="Android">Android</option>
+<option value="iOS">iOS</option>
+<option value="React Native">React Native</option>
+<option value="Flutter">Flutter</option>
+<option value="Xamarin">Xamarin</option>
+<option value="Apache Cordova">Apache Cordova</option>
+<option value="Adobe PhoneGap">Adobe PhoneGap</option>
+<option value="Ionic">Ionic</option>
+<option value="Unity for Mobile">Unity for Mobile</option>
+<option value="NativeScript">NativeScript</option>
+<option value="Java for Android">Java for Android</option>
+<option value="Kotlin for Android">Kotlin for Android</option>
+<option value="Swift for iOS">Swift for iOS</option>
+<option value="Objective-C for iOS">Objective-C for iOS</option>
+<option value="C# for Xamarin">C# for Xamarin</option>
+<option value="JavaScript for Cordova/PhoneGap">JavaScript for Cordova/PhoneGap</option>
+<option value="TypeScript for Ionic">TypeScript for Ionic</option>
+<option value="C# for Unity Mobile">C# for Unity Mobile</option>
+<option value="Dart for Flutter">Dart for Flutter</option>
+<option value="React.js for React Native">React.js for React Native</option>
+<option value="Vue.js for NativeScript">Vue.js for NativeScript</option>
+<option value="Angular for NativeScript">Angular for NativeScript</option>
+<option value="SwiftUI for iOS">SwiftUI for iOS</option>
+<option value="Kotlin Multiplatform Mobile (KMM)">Kotlin Multiplatform Mobile (KMM)</option>
+<option value="Flutter for Web">Flutter for Web</option>
+<option value="Progressive Web Apps (PWA)">Progressive Web Apps (PWA)</option>
+<option value="Ionic with Capacitor">Ionic with Capacitor</option>
+<option value="Flutter for Desktop">Flutter for Desktop</option>
+<option value="Flutter for AR/VR">Flutter for AR/VR</option>
+<option value="React Native for Windows">React Native for Windows</option>
+<option value="Flutter for Linux">Flutter for Linux</option>
+<option value="Flutter for macOS">Flutter for macOS</option>
+<option value="Flutter for iOS (macOS host)">Flutter for iOS (macOS host)</option>
+<option value="Flutter for Android (macOS host)">Flutter for Android (macOS host)</option>
+<option value="Flutter for Embedded Devices">Flutter for Embedded Devices</option>
+<option value="Flutter for AI/ML">Flutter for AI/ML</option>
+<option value="Flutter for Game Development">Flutter for Game Development</option>
+<option value="Flutter for IoT">Flutter for IoT</option>
+<option value="Flutter with BLoC pattern">Flutter with BLoC pattern</option>
+<option value="Flutter with Redux">Flutter with Redux</option>
+<option value="Flutter State Management">Flutter State Management</option>
+<option value="Flutter Animation">Flutter Animation</option>
+<option value="Flutter Testing">Flutter Testing</option>
+<option value="Flutter with Firebase">Flutter with Firebase</option>
+<option value="Flutter with GraphQL">Flutter with GraphQL</option>
+<option value="Flutter Maps and Location">Flutter Maps and Location</option>
+<option value="Flutter Push Notifications">Flutter Push Notifications</option>
+
+<!-- Cybersecurity -->
+<option value="Cybersecurity">Cybersecurity</option>
+<option value="Ethical Hacking">Ethical Hacking</option>
+<option value="Penetration Testing">Penetration Testing</option>
+<option value="Network Security">Network Security</option>
+<option value="Web Application Security">Web Application Security</option>
+<option value="Mobile Application Security">Mobile Application Security</option>
+<option value="Cloud Security">Cloud Security</option>
+<option value="IoT Security">IoT Security</option>
+<option value="Blockchain Security">Blockchain Security</option>
+<option value="Malware Analysis">Malware Analysis</option>
+<option value="Incident Response">Incident Response</option>
+<option value="Digital Forensics">Digital Forensics</option>
+<option value="Security Operations Center (SOC)">Security Operations Center (SOC)</option>
+<option value="Threat Intelligence">Threat Intelligence</option>
+<option value="Vulnerability Assessment">Vulnerability Assessment</option>
+<option value="Security Information and Event Management (SIEM)">Security Information and Event Management (SIEM)</option>
+<option value="Identity and Access Management (IAM)">Identity and Access Management (IAM)</option>
+<option value="Data Privacy and Compliance">Data Privacy and Compliance</option>
+<option value="Social Engineering">Social Engineering</option>
+<option value="Wireless Security">Wireless Security</option>
+<option value="Cryptography">Cryptography</option>
+<option value="Security Certifications">Security Certifications</option>
+<option value="Cybersecurity Frameworks">Cybersecurity Frameworks</option>
+<option value="Secure Coding">Secure Coding</option>
+<option value="Security Awareness Training">Security Awareness Training</option>
+<option value="Cybersecurity Risk Assessment">Cybersecurity Risk Assessment</option>
+<option value="Security Policy and Governance">Security Policy and Governance</option
+
+    <option value="Other">Other</option>    
+</select>
+  
+                            {% comment %} {% include 'skills.html' %}  {% endcomment %}
+                        </div>
+                        <div class="my-3">
+                            
+                            <button type="submit" class="btn btn-primary">
+                                Create Profile
+                            </button>
+                        </div>
+                    </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock  %}

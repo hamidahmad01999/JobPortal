@@ -1,0 +1,107 @@
+{% extends '../base.html' %}
+{% block content %}
+{% load filter %}
+
+    <div class="container d-flex justify-content-center mb-4">
+        <div class="col-md-10 col-lg-9" style="position: relative;">
+            <div class="back_btn mt-3" style="display: inline; position: absolute;left: 50px;"><a style="text-decoration: none;color: black;font-size: 20px; font-weight: bold;" href="/professionals/">&lt;Back</a></div>
+            <h3 class='text-center'>Professional Detaills</h3>
+            {% if data %}
+            <div class="row" style="display: flex;justify-content: space-between;">
+                <div class="first_section_professional col-md-12 my-4" style=" display: flex;justify-content: space-between; align-items: center;">
+                    <div class="professional_personal_details_left d-flex   justify-content-start">
+                        <div class="professional_personal_image" style="width: 80px; height:    80px; margin-right: 15px;">
+                            <img style="width: 100%;height: 100%; border-radius: 50%;" src="/media/{{data.employeeImage}}" alt="">
+                        </div>
+                        <div class="professional_personal_details_info">
+                            <p style="font-size: 19px; padding-top: 2px;margin: 0px;"><b>   {{data.employeeName}}</b></p>
+                            <p style="font-size: 14px; padding-top: 2px;margin: 0px;">{{data.employeeProfession}}</p>
+                            <p style="font-size: 12px; padding-top: 1px;margin: 0px;">{{data.employeeCity}}</p>
+                        </div>
+                    </div>
+                    <div class="professional_personal_details_right">
+                        <button style="font-size: 16px;" class="btn btn-secondary"><a   style="color: white; text-decoration: none;" href="">Download CV</a></button>
+                    </div>
+                </div>
+                <div class="col-md-7 my-4">
+                    <p class="my-1 py-1">
+                        <p style="font-size: 19px;"><b>About Me:</b></p>
+                        {{data.employeeProfessionalSummary}}
+                    </p>
+                    <p class="my-1 py-1">
+                        <p style="font-size: 19px;"><b>Work Experience:</b></p>
+                        {{data.employeeWorkExperience}}
+                    </p>
+                    <p class="my-1 py-1">
+                        <p style="font-size: 19px;"><b>Skills:</b></p>
+                        <b>{{data.employeeSkills|replace}}</b>
+                    </p>
+                    <p class="my-1 py-1">
+                        <p style="font-size: 19px;"><b>Education:</b></p>
+                        {{data.employeeEducation}}
+                    </p>
+                    <p class="my-1 py-1">
+                        <p style="font-size: 19px;"><b>Address:</b></p>
+                        {{data.employeeAddress}}
+                    </p>
+                </div>
+                <div class="third_section_professinal col-md-5 col-lg-4 my/-4" style=" border-radius: 10px;box-shadow: 5px 5px 5px rgba(0,0,0,0.2), -3px -3px 3px rgba(0,0,0,0.1); height:100%;">
+                    <h3 class="my-2" style=" width: 100%; ">Overview</h3>
+                    <div class="p-2" style="border-top: 1px solid rgba(0,0,0,0.4);">
+                    <p  class="my-1">
+                        <p style="margin-bottom: 5px;">Experience</p><p style="margin-right: 15px;margin-bottom: 5px;"><b>{{data.employeeWorkExperienceYear}}</b></p>
+                    </p>
+                    <p class="my-1">
+                        <p style="margin-bottom: 5px;">Education</p><p style="margin-right: 15px; margin-bottom: 5px;"><b>{{data.employeeEducation}}</b></p>
+                    </p>
+                    <p class="my-1">
+                        <p style="margin-bottom: 5px;">Languages</p><p style="margin-right: 15px; margin-bottom: 5px;">
+                            
+                            <b>{{data.employeeLanguages|replace}}</b>
+                            <!-- {{data.employeeLanguages|split:","}} -->
+                        </p>
+                    </p>
+                    <p class="my-1">
+                        <p style="margin-bottom: 5px;">City</p><p style="margin-right: 15px; margin-bottom: 5px;"><b>{{data.employeeCity}}</b></p>
+                    </p>
+                    </div>
+                    <div class="employee_address mt-3 py-3 mb-3">
+                        <p>
+                            <!-- <p style="padding-right: 5px;display: inline;">Address:</p> -->
+                            {{data.employeeAddress}}
+                        </p>
+                        <p>
+                            <p style="padding-right: 5px;display: inline;">Email:</p>{{data.employeeEmail}}
+                        </p>
+                        <p>
+                            <p style="padding-right: 5px;display: inline;">Phone:</p>{{data.employeePhone}}
+                        </p>
+                    </div>
+                    {% if data.employeeFacebook or data.employeeInstagram %}
+                    <h5 class="text-center">Connect with {{data.employeeName}} On:</h5>
+                    <div class="employee_socailmedia my-3">
+                        <div class=""></div>
+                        {% if data.employeeFacebook %}
+                            <a  class="social_icons" href="{{data.employeeFacebook}}"><img class="social_img" style="width: 50px; height: 50px; border-radius: 7px; margin: 3px 3px;"  src="/static/img/facebook.jpg" alt=""></a>
+                        {%endif%}
+                        {% if data.employeeInstagram %}
+                            <a class="social_icons" href="{{data.employeeInstagram}}"><img class="social_img" style="width: 50px; height: 50px; border-radius: 7px; margin: 3px 3px;"  src="/static/img/instagram.jpg" alt=""></a>
+                        {%endif%}
+                        {% if data.employeeGithub %}
+                            <a class="social_icons" href="{{data.employeeGithub}}"><img s class="social_img" style="width: 50px; height: 50px; border-radius: 7px; margin: 3px 3px;" src="/static/img/github.png" alt=""></a>
+                        {%endif%}
+                        {% if data.employeeLinkedIn %}
+                            <a class="social_icons" href="{{data.employeeLinkedIn}}"><img class="social_img" style="width: 50px; height: 50px; border-radius: 7px; margin: 3px 3px;"  src="/static/img/linkedin.png" alt=""></a>
+                        {%endif%}
+                    </div>
+                    {%endif%}
+
+                </div>
+                <button style="width: 150px; font-size: 19px; font-weight: bold;" class="btn btn-secondary py-2 py-2 mt-4 mx-1">Hire Me</button>
+                <button style="width: 150px; font-size: 19px; font-weight: bold;" class="btn btn-secondary py-2 py-2 mt-4 mx-1"><a style="text-decoration: none; color: white;" href="/professionals/delete/{{data.employeeSlug}}">Delete Me</a></button>
+                <button style="width: 150px; font-size: 19px; font-weight: bold;" class="btn btn-secondary py-2 py-2 mt-4 mx-1"><a style="text-decoration: none; color: white;" href="/professionals/edit/{{data.employeeSlug}}">Edit Me</a></button>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock  %}

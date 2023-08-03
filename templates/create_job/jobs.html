@@ -1,0 +1,122 @@
+{% extends '../base.html' %}
+{% block content %}
+    <div class="container jobs">
+        <div class="row jobs_area mt-3">
+            <div class="col-md-10 professionals_search" id="filter" style="transition: 1s; ">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <div class="professional_search_item">
+                        <button class="btn btn-primary" type="submit">Search</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-10 my-2">
+                <button style="width: 150px;" class="btn btn-secondary" id="filter_btn">Filter</button>
+            </div>
+            {% if messages %}
+                {% for message in messages %}
+                    <h3>{{message}}</h3>
+                {% endfor %}
+            {% endif %}
+            {% if jobs %}
+                {% for job in jobs %}
+            <div class="col-md-3"  style="padding:20px">
+                <div class="row">
+                    <div class="col-12" style="border:2px solid black; position: relative; border-radius: 10px;
+                    box-shadow:5px 5px 3px rgba(0,0,0,0.3);
+                    ">
+                    <div class="d-flex align-items-center pt-2" style="display: flex;">
+                        <div style="width: 50px; height: 50px;margin-right: 7px; ">
+                            <img style="width: 100%; height: 100%;  border-radius:50%; border: 1px solid black; " src="
+                            {% if job.companyImage %}
+                            /media/{{job.companyImage}}
+                            {% else %} /media/company_images/dummy_man.png  {%   endif %}"
+                            alt="">
+                        </div>
+                        <div  >
+                            <p style=" line-height: 12px;margin: 0px; padding-top: 3px;"><b>{{job.jobTitle}}</b></p>
+                            <small style="line-height: 10px; ">{{job.jobLocation}}</small>
+                        </div>
+                    </div>
+                    <div class="my-1">
+                        <p style="font-size:16px">{{job.jobDescription | slice:"0:200"}}...</p>
+
+                    </div>
+                    <div class="professional_address " style="display: flex; justify-content: space-between; align-items: center;">
+                        <p style="font-size: 15px;"><b>{{job.salaryRange}}$</b></p><button style="font-size: 14px;" class="btn btn-secondary"><a style="color: white; text-decoration: none;" href="/job/detail/{{job.postJobSlug}}/">View Details</a></button>
+                    </div>
+                        <div  class="options">
+                            <p   style="position:    absolute; top: 5px; ; right: 10px; transform: rotate(90deg);   cursor: potiner; margin: 5px;"><b style="cursor: pointer;  position: relative;">...</b>
+                            <div class="options_detail" id="options_detail"     style="display: none; border-radius: 10px; padding: 10px;  position: absolute; top: 5px; right: 2px; background: grey; border: 1px solid black; z-index: 10;">
+                                <div class="" style="display: flex; flex-direction:column; padding: 5px 10px;" >
+                                    <a style="text-decoration: none; color: black; font-size: 14px;" href="/job/edit/{{job.postJobSlug}}/">Edit</a>
+                                    <a style="text-decoration: none; color: black; font-size: 14px;" href="/job/delete/{{job.postJobSlug}}">Delete</a>
+                                    <a style="text-decoration: none; color: black; font-size: 14px;" href="/job/detail/{{job.postJobSlug}}">Detail</a>
+
+                                </div>
+                            </div>
+                        </div>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!-- <script>
+                var options= document.querySelectorAll('.options')
+                var options_detail= document.querySelectorAll('.options_detail')
+                showoptions=()=>{
+                    console.log("CLicked")
+                    options_detail.style.display='block'
+        
+                    document.addEventListener('click', handleoutsideclick)
+                }
+        
+                function handleoutsideclick(event){
+                    if(options_detail.style.display=='none'){
+                        document.removeEventListener('click', handleoutsideclick)
+                    }
+                    
+                    console.log("work")
+                    if(!options_detail.contains(event.target) && !options.contains(event.target)){
+                        options_detail.style.display='none'
+                    }
+        
+                    // document.removeEventListener('click', handleoutsideclick)}
+                }
+            </script> -->
+                {% endfor %}
+            {% else %}
+                <p>No job Found</p>
+            {% endif %}
+        </div>
+    </div>
+    <script>
+        var options= document.querySelectorAll('.options')
+        var options_detail= document.querySelectorAll('.options_detail')
+
+        options.forEach(box => {
+        box.addEventListener('click', function() {
+            // Get the index of the clicked box in the NodeList
+            index = Array.from(options).indexOf(this);
+            
+            options_detail[index].style.display='block'
+            // Do something with the index or the clicked box
+            console.log(`Clicked on Box ${index}`);
+            document.addEventListener('click', handleoutsideclick)
+            
+    })})
+
+    function handleoutsideclick(event){
+        if(options_detail[index].style.display=='none'){
+            document.removeEventListener('click', handleoutsideclick)
+        }
+
+        if(!options_detail[index].contains(event.target) && !options[index].contains(event.target)){
+            options_detail[index].style.display='none'
+        }
+    }    
+                
+
+    </script>
+    
+{% endblock  %}

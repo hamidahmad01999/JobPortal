@@ -1,0 +1,121 @@
+{% extends '../base.html' %}
+{% block content %}
+{% load filter %}
+
+    <div class="container">
+        <div class="row professionals_container d-flex justify-content-center mt-4">
+            <div class="col-md-10 professionals_search" id="filter" style="transition: 1s; ">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <div class="professional_search_item">
+                        <button class="btn btn-primary" type="submit">Search</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-10 my-2">
+                <button style="width: 150px;" class="btn btn-secondary" id="filter_btn">Filter</button>
+                <button style="width: 150px;" class="btn btn-secondary" id="filter_btn"><a href="/createemployeeprofile" style="text-decoration: none; color: white;">Create Profile</a></button>
+            </div>
+            {% if messages %}
+                {% for message in messages %}
+                    <h3>{{message}}</h3>
+                {% endfor %}
+            {% endif %}
+            {% if data %}
+                {% for i in data %}
+            <div class="col-md-4 col-xl-3 col-sm-6 professionals_area" >
+                <div class="mx-1 my-2"  style="box-shadow: 5px 5px 5px rgba(0,0,0,0.3), -1px -1px 1px rgba(0,0,0,0.2); border-radius: 10px; padding: 10px 8px;">
+                    <div class="d-flex align-items-center" style="display: flex;">
+                        <div style="width: 50px; height: 50px;margin-right: 7px; ">
+                            <img style="width: 100%; height: 100%;  border-radius:50%; border: 1px solid black; " src="
+                            {% if i.employeeImage %}
+                            /media/{{i.employeeImage}}
+                            {% else %} /media/employeeImages/dummy_man.png  {%   endif %}"
+                            alt="">
+                        </div>
+                        <div  >
+                            <p style=" line-height: 12px;margin: 0px; padding-top: 3px;"><b>{{i.employeeName}}</b></p>
+                            <small style="line-height: 10px; ">{{i.employeeProfession}}</small>
+                        </div>
+                    </div>
+                    <div class="second_professional_area my-1" style="font-size: 15px;">
+                        <p>{{i.employeeProfessionalSummary |slice:"0:250"}}..</p>
+                    </div>
+                    <div class="professional_skills" style="margin-bottom: 10px;">
+                        {% with i.employeeSkills|split:"," as skills%}
+                            {% for skill in skills %}
+                            {% if forloop.counter > 1 and forloop.counter < 5 %}
+                            <p class="m-1 p-1" style="border: 1px solid black; background: #EFF3FC; color: black; display: inline; border-radius: 3px;">
+                                {{skill|remove:"'"}}
+                            </p>
+                            {% endif %}
+                            {% endfor %}
+                        {% endwith %}
+                    </div>
+                    <div class="professional_address " style="display: flex; justify-content: space-between; align-items: center;">
+                        <p style="font-size: 14px;"><b>{{i.employeeCity}}</p></b><button style="font-size: 14px;" class="btn btn-secondary"><a style="color: white; text-decoration: none;" href="/professionaldetails/{{i.employeeSlug}}/">View Details</a></button>
+                    </div>
+                </div>
+            </div>
+                {% endfor %}
+            {% else %}
+            <div class="col-md-8">
+                <h3 class="text-center">
+                    No data Found!
+                </h3>
+            </div>
+            {% endif %}
+            <div class="col-12 pagination my-4 d-flex justify-content-center" >
+                <nav aria-label="...">
+                    <ul class="pagination">
+                    {% if data.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="/professionals/?page={{data.previous_page_number}}">Prev</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="/professionals/?page=1">1</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled">
+                            <a class="page-link " href="">Prev</a>
+                        </li>
+                        <li class="page-item disabled">
+                            <a class="page-link " href="/professionals/?page=1">1</a>
+                        </li>
+                    {% endif %}
+                    {% for i in pages %}
+                        {% if i > 1 %}
+                      <li class="page-item {% if data.number == i %} active{% endif %}">
+                        <a class="page-link" href="/professionals/?page={{i}}">{{i}}</a>
+                      </li>
+                    {% endif %}
+                    {% endfor %}
+                      
+                        {% if data.has_next %}
+                      <li class="page-item">
+                        <a class="page-link" href="/professionals/?page={{data.next_page_number}}">Next</a>
+                      </li>
+                      {% else %}
+                      <li class="page-item disabled">
+                        <a class="page-link" href="">Next</a>
+                      </li>
+                      {% endif %}
+                    </ul>
+                  </nav>
+            </div>
+        </div>
+    </div>
+    <script>
+        var filter=document.getElementById('filter')
+        var filter_btn=document.getElementById('filter_btn')
+
+        filter_btn.addEventListener('click',function(){
+            if(filter.style.display=='block'){
+                filter.style.display='none'
+            }else{
+                filter.style.display='block'
+            }
+        })
+    </script>
+{% endblock  %}
