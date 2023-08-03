@@ -190,10 +190,6 @@ def EditedJob(request, slug):
             if request.method == 'POST':
                 print('3rda')
                 form=CreateJob(request.POST, request.FILES)
-                if(form.erros):
-                    print(form.errors)
-                    messages.error(request, f"{form.errors}\n Or Internal server error.")
-                    return redirect('/job')
                 if form.is_valid():
                     print('3rd')
                     jobTitle=form.cleaned_data.get('jobTitle')
@@ -243,9 +239,12 @@ def EditedJob(request, slug):
                     messages.success(request, "Job Updated sucessfully.")
                     return redirect("/job")
         else:
+            print(form.errors)
+            print('eror')
             messages.error(request, "Job does not exist")
             return redirect("/job")
     except:
+        print(form.errors)
         messages.error(request, "Fill all field Or Internal server error.")
         return redirect("/job")
     

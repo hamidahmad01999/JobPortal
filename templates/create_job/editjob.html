@@ -11,7 +11,7 @@
             {% if job %}
             <form action="/job/edited/{{job.postJobSlug}}/" method="post" enctype="multipart/form-data" class="createjob_form my-2">
                 {% csrf_token %}
-                {{form}}
+                {{form.as_p}}
                 
                 <div class="createjob_form_btn">
                     <button type="submit" class="btn btn-primary py-2 px-3">Update Job</button>
