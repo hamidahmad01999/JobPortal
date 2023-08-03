@@ -13,11 +13,16 @@
             </div>
             <div class="col-md-10 my-2">
                 <button style="width: 150px;" class="btn btn-secondary" id="filter_btn">Filter</button>
+                
+                <button style="width: 150px;" class="btn btn-secondary" id="filter_btn"><a href="/createjob" style="text-decoration: none; color: white;">Create Job</a></button>
             </div>
             {% if messages %}
                 {% for message in messages %}
                     <h3>{{message}}</h3>
                 {% endfor %}
+            {% endif %}
+            {%if total %}
+                <p style="font-size:17px">Total <b>{{total}}</b> results found </p>
             {% endif %}
             {% if jobs %}
                 {% for job in jobs %}
@@ -27,7 +32,7 @@
                     box-shadow:5px 5px 3px rgba(0,0,0,0.3);
                     ">
                     <div class="d-flex align-items-center pt-2" style="display: flex;">
-                        <div style="width: 50px; height: 50px;margin-right: 7px; ">
+                        <div style="width: 60px; height: 60px;margin-right: 7px; ">
                             <img style="width: 100%; height: 100%;  border-radius:50%; border: 1px solid black; " src="
                             {% if job.companyImage %}
                             /media/{{job.companyImage}}
@@ -36,7 +41,8 @@
                         </div>
                         <div  >
                             <p style=" line-height: 12px;margin: 0px; padding-top: 3px;"><b>{{job.jobTitle}}</b></p>
-                            <small style="line-height: 10px; ">{{job.jobLocation}}</small>
+                            <p style="line-height: 11px; font-size=10px"class="pt-1">{{job.companyName}}</p>
+                            <p style="line-height: 12px; font-size=10px" >{{job.jobLocation}}</p>
                         </div>
                     </div>
                     <div class="my-1">
@@ -59,35 +65,51 @@
                         </div>
                         </p>
                     </div>
+                    
                 </div>
             </div>
-            <!-- <script>
-                var options= document.querySelectorAll('.options')
-                var options_detail= document.querySelectorAll('.options_detail')
-                showoptions=()=>{
-                    console.log("CLicked")
-                    options_detail.style.display='block'
-        
-                    document.addEventListener('click', handleoutsideclick)
-                }
-        
-                function handleoutsideclick(event){
-                    if(options_detail.style.display=='none'){
-                        document.removeEventListener('click', handleoutsideclick)
-                    }
-                    
-                    console.log("work")
-                    if(!options_detail.contains(event.target) && !options.contains(event.target)){
-                        options_detail.style.display='none'
-                    }
-        
-                    // document.removeEventListener('click', handleoutsideclick)}
-                }
-            </script> -->
                 {% endfor %}
             {% else %}
                 <p>No job Found</p>
             {% endif %}
+            <div class="col-12 pagination my-4 d-flex justify-content-center" >
+                <nav aria-label="...">
+                    <ul class="pagination">
+                    {% if jobs.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="/job/?page={{jobs.previous_page_number}}">Prev</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="/job/?page=1">1</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled">
+                            <a class="page-link " href="">Prev</a>
+                        </li>
+                        <li class="page-item disabled">
+                            <a class="page-link " href="/job/?page=1">1</a>
+                        </li>
+                    {% endif %}
+                    {% for i in pages %}
+                        {% if i > 1 %}
+                      <li class="page-item {% if data.number == i %} active{% endif %}">
+                        <a class="page-link" href="/job/?page={{i}}">{{i}}</a>
+                      </li>
+                    {% endif %}
+                    {% endfor %}
+                      
+                        {% if jobs.has_next %}
+                      <li class="page-item">
+                        <a class="page-link" href="/job/?page={{jobs.next_page_number}}">Next</a>
+                      </li>
+                      {% else %}
+                      <li class="page-item disabled">
+                        <a class="page-link" href="">Next</a>
+                      </li>
+                      {% endif %}
+                    </ul>
+                  </nav>
+            </div>
         </div>
     </div>
     <script>
@@ -115,7 +137,18 @@
             options_detail[index].style.display='none'
         }
     }    
-                
+       
+    
+        var filter=document.getElementById('filter')
+        var filter_btn=document.getElementById('filter_btn')
+
+        filter_btn.addEventListener('click',function(){
+            if(filter.style.display=='block'){
+                filter.style.display='none'
+            }else{
+                filter.style.display='block'
+            }
+        })
 
     </script>
     

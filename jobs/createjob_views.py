@@ -93,16 +93,42 @@ def PostJob(request):
 
 #this function is to show the jobs where user can finds new and old jobs
 def ShowJobs(request):
-    # try:
+    try:
         get_jobs= newJob.objects.all()
-        paginator=Paginator(get_jobs,6)
+        result_num=get_jobs.count()
+        searchMenu=ProfessionalSearch() #get profiles of job seeker(users)
+        #it will be use to filter result in professionals
+        if request.method=="POST":
+            name = request.POST.get('searchProfessionalName')
+            address = request.POST.get('searchProfessionalAddress')
+            skills = request.POST.get('searchProfessionalSkills')
+            print(name, address, skills)
+            professionals=newJob.objects.all()
+            if name:
+                professionals=professionals.filter(Q(jobTitle__icontains=name) )
+                
+            # if name:    
+            #     professionals=professionals.filter(Q(companyName__icontains=name))
+                
+            if address:
+                professionals=professionals.filter(Q(jobLocation__icontains=address))
+    
+            if skills:
+                professionals=professionals.filter(Q(skillsRequirement__icontains=skills))
+            
+            if(not name and not address and not skills):
+                return redirect('/job')
+            result_num=professionals.count()
+            return render(request, 'create_job/jobs.html', {'jobs':professionals, 'form':searchMenu,'total':result_num })
+
+        paginator=Paginator(get_jobs,2)
         page_number= request.GET.get('page')
         jobs= paginator.get_page(page_number)
-
-        return render(request, "create_job/jobs.html", {"jobs":jobs})
-    # except:
-    #     messages.error(request, "Some kind of internal error.")
-    #     return redirect("/createjob")
+        pages=jobs.paginator.num_pages
+        return render(request, "create_job/jobs.html", {'total':result_num,"jobs":jobs, 'form':searchMenu,'pages':[n+1 for n in range(pages)] })
+    except:
+        messages.error(request, "Some kind of internal error.")
+        return redirect("/createjob")
 
 #this function can use to delete any existing jobd
 def DeleteJob(request, slug):
@@ -145,30 +171,31 @@ def EditJob(request, slug):
 
         if(get_job):
             form=CreateJob(instance=get_job)
-            return render(request, 'employee/professional_edit.html', {'form':form, "employee":get_job})
+            return render(request, 'create_job/editjob.html', {'form':form, "job":get_job})
         else:
             messages.error(request, "Professional details can not be load to edit now!")
             return redirect('/createjob')
-
-        # if(get_job):
-            
-        #     return render(request, 'create_job/editjob.html', {"job":get_job})
-        # else:
-        #     messages.error(request, "This job does not exist.")
-        #     return redirect("/createjob")
     except:
         messages.error(request, "Some kind of internal error.")
         return redirect("/createjob")
     
 #this function will be used to edit the job
 def EditedJob(request, slug):
+    print('1st')
     try:
         slug=slug
         get_job= newJob.objects.get(postJobSlug=slug)
         if(get_job):
+            print('2nd')
             if request.method == 'POST':
-                form=CreateEmployeeProfile(request.POST, request.FILES)
+                print('3rda')
+                form=CreateJob(request.POST, request.FILES)
+                if(form.erros):
+                    print(form.errors)
+                    messages.error(request, f"{form.errors}\n Or Internal server error.")
+                    return redirect('/job')
                 if form.is_valid():
+                    print('3rd')
                     jobTitle=form.cleaned_data.get('jobTitle')
                     jobDescription=form.cleaned_data.get('jobDescription')
                     skillsRequirement=form.cleaned_data.get('skillsRequirement')
@@ -219,7 +246,7 @@ def EditedJob(request, slug):
             messages.error(request, "Job does not exist")
             return redirect("/job")
     except:
-        messages.error(request, "Internal server error")
+        messages.error(request, "Fill all field Or Internal server error.")
         return redirect("/job")
     
 
@@ -308,17 +335,18 @@ def Professionals(request):
             
             if(not name and not address and not skills):
                 return redirect('/professionals')
-    
-            return render(request, 'employee/professionals.html', {'data':professionals, 'form':searchMenu })
+            result_num=professionals.count()
+            return render(request, 'employee/professionals.html', {'total':result_num,'data':professionals, 'form':searchMenu })
             
         professionals=CreateEmployeeModel.objects.all()
+        result_num=professionals.count()
         if(professionals):
             paginator=Paginator(professionals,8)
             page_number= request.GET.get('page')
             data= paginator.get_page(page_number)
             pages=data.paginator.num_pages
             print(pages)
-            return render(request, 'employee/professionals.html', {'data':data, 'form':searchMenu,
+            return render(request, 'employee/professionals.html', {'total':result_num,'data':data, 'form':searchMenu,
                                                                     'pages':[n+1 for n in range(pages)] })
         # it will be send to page if there will not exist any professional profie
         return render(request, 'employee/professionals.html', {'data':data, 'form':searchMenu})                                                       
