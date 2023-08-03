@@ -253,9 +253,10 @@ def EditedJob(request, slug):
 # this function will show the that page to user where he can create his profile to get job
 def EmployeeProfile(request):
     try:
+        SoftSkills=Skills = ["HTML","CSS","JavaScript","Python","Java","C#","PHP","SQL","Node.js","React","Angular","Vue.js","TypeScript","Ruby","Swift","Kotlin","C","C++","R","Shell scripting","Git","Docker","Kubernetes","Amazon Web Services (AWS)","Microsoft Azure","Google Cloud Platform (GCP)","Networking","Cybersecurity","Data Analysis","Machine Learning","Artificial Intelligence","Data Science","Databases","Ruby on Rails","Django","Flask","Spring Framework","Hibernate","Express.js","NestJS","Go (Golang)","Rust","Scala","Haskell","Erlang","Lua","Bash scripting","PowerShell","MongoDB","MySQL","PostgreSQL","Oracle","NoSQL databases","Big Data","Apache Spark","Apache Hadoop","TensorFlow","Keras","PyTorch","scikit-learn","NLTK","OpenCV","Unity","Unreal Engine","Agile Development","DevOps","Continuous Integration (CI)","Continuous Deployment (CD)","Jenkins","Ansible","Puppet","Chef","Terraform","Azure DevOps","GitLab","SonarQube","Kibana","Grafana","Splunk","Bootstrap","Tailwind CSS","Material UI","Android","iOS","React Native","Flutter","Xamarin","Apache Cordova","Adobe PhoneGap","Ionic","Unity for Mobile","NativeScript","Java for Android","Kotlin for Android","Swift for iOS","Objective-C for iOS","C# for Xamarin","JavaScript for Cordova/PhoneGap","TypeScript for Ionic","C# for Unity Mobile","Dart for Flutter","React.js for React Native","Vue.js for NativeScript","Angular for NativeScript","SwiftUI for iOS","Kotlin Multiplatform Mobile (KMM)","Flutter for Web","Progressive Web Apps (PWA)","Ionic with Capacitor","Flutter for Desktop","Flutter for AR/VR","React Native for Windows","Flutter for Linux","Flutter for macOS","Flutter for iOS (macOS host)","Flutter for Android (macOS host)","Flutter for Embedded Devices","Flutter for AI/ML","Flutter for Game Development","Flutter for IoT","Flutter with BLoC pattern","Flutter with Redux","Flutter State Management","Flutter Animation","Flutter Testing","Flutter with Firebase","Flutter with GraphQL","Flutter Maps and Location","Flutter Push Notifications","Cybersecurity","Ethical Hacking","Penetration Testing","Network Security","Web Application Security","Mobile Application Security","Cloud Security","IoT Security","Blockchain Security","Malware Analysis","Incident Response","Digital Forensics","Security Operations Center (SOC)","Threat Intelligence","Other"]
         form=CreateEmployeeProfile()
         form2=CreateEmployeeProfileAdd()
-        return render(request, 'employee/createemployee.html', {"form":form, 'form2':form2})
+        return render(request, 'employee/createemployee.html', {"form":form, 'form2':form2, 'allskills':SoftSkills})
     except:
         messages.error(request, "Internal server error")
         return redirect('/')
@@ -372,16 +373,22 @@ def ProfessionalDetails(request, slug):
 #it will show edit/update job seeker details page
 def EditProfessionalDetails(request,slug):
     try:
+        SoftSkills=Skills = ["HTML","CSS","JavaScript","Python","Java","C#","PHP","SQL","Node.js","React","Angular","Vue.js","TypeScript","Ruby","Swift","Kotlin","C","C++","R","Shell scripting","Git","Docker","Kubernetes","Amazon Web Services (AWS)","Microsoft Azure","Google Cloud Platform (GCP)","Networking","Cybersecurity","Data Analysis","Machine Learning","Artificial Intelligence","Data Science","Databases","Ruby on Rails","Django","Flask","Spring Framework","Hibernate","Express.js","NestJS","Go (Golang)","Rust","Scala","Haskell","Erlang","Lua","Bash scripting","PowerShell","MongoDB","MySQL","PostgreSQL","Oracle","NoSQL databases","Big Data","Apache Spark","Apache Hadoop","TensorFlow","Keras","PyTorch","scikit-learn","NLTK","OpenCV","Unity","Unreal Engine","Agile Development","DevOps","Continuous Integration (CI)","Continuous Deployment (CD)","Jenkins","Ansible","Puppet","Chef","Terraform","Azure DevOps","GitLab","SonarQube","Kibana","Grafana","Splunk","Bootstrap","Tailwind CSS","Material UI","Android","iOS","React Native","Flutter","Xamarin","Apache Cordova","Adobe PhoneGap","Ionic","Unity for Mobile","NativeScript","Java for Android","Kotlin for Android","Swift for iOS","Objective-C for iOS","C# for Xamarin","JavaScript for Cordova/PhoneGap","TypeScript for Ionic","C# for Unity Mobile","Dart for Flutter","React.js for React Native","Vue.js for NativeScript","Angular for NativeScript","SwiftUI for iOS","Kotlin Multiplatform Mobile (KMM)","Flutter for Web","Progressive Web Apps (PWA)","Ionic with Capacitor","Flutter for Desktop","Flutter for AR/VR","React Native for Windows","Flutter for Linux","Flutter for macOS","Flutter for iOS (macOS host)","Flutter for Android (macOS host)","Flutter for Embedded Devices","Flutter for AI/ML","Flutter for Game Development","Flutter for IoT","Flutter with BLoC pattern","Flutter with Redux","Flutter State Management","Flutter Animation","Flutter Testing","Flutter with Firebase","Flutter with GraphQL","Flutter Maps and Location","Flutter Push Notifications","Cybersecurity","Ethical Hacking","Penetration Testing","Network Security","Web Application Security","Mobile Application Security","Cloud Security","IoT Security","Blockchain Security","Malware Analysis","Incident Response","Digital Forensics","Security Operations Center (SOC)","Threat Intelligence","Other"]
+    
+
         print("Edit")
         slug=slug
         get_employee=CreateEmployeeModel.objects.get(employeeSlug=slug)
+        selected_skills=(get_employee.employeeSkills)
+        
         if(get_employee):
             form=CreateEmployeeProfile(instance=get_employee)
-            return render(request, 'employee/professional_edit.html', {'form':form, "employee":get_employee})
+            return render(request, 'employee/professional_edit.html', {'form':form, "employee":get_employee,  'selectedskills':selected_skills, 'allskills':SoftSkills})
         else:
             messages.error(request, "Professional details can not be load to edit now!")
             return redirect('/professionals')
     except:
+        
         messages.error(request, "Internal Server Error.")
         return redirect('/createemployeeprofile')
     

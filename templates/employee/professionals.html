@@ -22,9 +22,7 @@
                     <h3>{{message}}</h3>
                 {% endfor %}
             {% endif %}
-            {%if total %}
-                <p style="font-size:17px">Total <b>{{total}}</b> results found </p>
-            {% endif %}
+            
             {% if data %}
                 {% for i in data %}
             <div class="col-md-4 col-xl-3 col-sm-6 professionals_area" >
@@ -50,7 +48,7 @@
                             {% for skill in skills %}
                             {% if forloop.counter > 1 and forloop.counter < 5 %}
                             <p class="m-1 p-1" style="border: 1px solid black; background: #EFF3FC; color: black; display: inline; border-radius: 3px;">
-                                {{skill|remove:"'"}}
+                                {{skill|remove_sym}}
                             </p>
                             {% endif %}
                             {% endfor %}
