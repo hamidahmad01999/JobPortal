@@ -22,7 +22,9 @@
                     <h3>{{message}}</h3>
                 {% endfor %}
             {% endif %}
-            
+            {%if total %}
+                <p style="font-size:17px">Total <b>{{total}}</b> results found </p>
+            {% endif %}
             {% if data %}
                 {% for i in data %}
             <div class="col-md-4 col-xl-3 col-sm-6 professionals_area" >

@@ -121,7 +121,7 @@ def ShowJobs(request):
             result_num=professionals.count()
             return render(request, 'create_job/jobs.html', {'jobs':professionals, 'form':searchMenu,'total':result_num })
 
-        paginator=Paginator(get_jobs,2)
+        paginator=Paginator(get_jobs,3)
         page_number= request.GET.get('page')
         jobs= paginator.get_page(page_number)
         pages=jobs.paginator.num_pages
@@ -318,6 +318,7 @@ def SaveEmployee(request):
 def Professionals(request):
     try:
         searchMenu=ProfessionalSearch() #get profiles of job seeker(users)
+        # result_num=searchMenu.count()
         #it will be use to filter result in professionals
         if request.method=="POST":
             name = request.POST.get('searchProfessionalName')
