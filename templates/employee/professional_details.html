@@ -20,7 +20,9 @@
                         </div>
                     </div>
                     <div class="professional_personal_details_right">
-                        <button style="font-size: 16px;" class="btn btn-secondary"><a   style="color: white; text-decoration: none;" href="">Download CV</a></button>
+                        {% if data.employeeResume %}
+                        <button style="font-size: 16px;" class="btn btn-secondary"><a   style="color: white; text-decoration: none;" href="/media/{{data.employeeResume}}" Download>Download CV</a></button>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="col-md-7 my-4">

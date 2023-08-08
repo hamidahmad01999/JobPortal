@@ -287,7 +287,8 @@ def SaveEmployee(request):
                 employeeInstagram=form.cleaned_data['employeeInstagram']
                 employeeGithub=form.cleaned_data['employeeGithub']
                 employeeLinkedIn=form.cleaned_data['employeeLinkedIn']
-                print(employeeName, employeeSkills, employeeImage,employeeFacebook, employeeInstagram,employeeLinkedIn,employeeGithub)
+                employeeResume=request.FILES.get('file')
+                print(employeeName, employeeSkills,employeeResume, employeeImage,employeeFacebook, employeeInstagram,employeeLinkedIn,employeeGithub)
                 if is_Image(employeeImage):
                     print("No problem")
                 else:
@@ -298,7 +299,7 @@ def SaveEmployee(request):
 
 
                 SaveEmployee= CreateEmployeeModel(employeeProfession=employeeProfession,employeeName=employeeName, employeeEmail=employeeEmail, employeePhone=employeePhone, employeeAddress=employeeAddress, employeeSkills=employeeSkills, employeeEducation=employeeEducation, employeeWorkExperience=employeeWorkExperience, employeeProfessionalSummary=employeeProfessionalSummary, employeeImage=employeeImage, employeeCity=employeeCity, employeeLanguages=employeeLanguages,employeeWorkExperienceYear=employeeWorkExperienceYear,employeeFacebook=employeeFacebook,employeeInstagram=employeeInstagram,employeeGithub=employeeGithub,employeeLinkedIn=employeeLinkedIn
-                )
+                ,employeeResume=employeeResume)
                 SaveEmployee.save()
                 messages.success(request, "Your profile created successfully.")
                 return redirect('/createemployeeprofile')

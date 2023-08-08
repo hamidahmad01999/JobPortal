@@ -16,16 +16,20 @@
                         {% comment %} {{form2}} {% endcomment %}
                         <div class="">
                             
-<script src="/static/multiselect-dropdown.js"></script>
-<label for="skills">Skills</label>
-<select class="form-control my-3" name="employeeSkills" id="cars" multiple multiselect-search="true">
-    {% for skill in allskills %}
-        <option value="{{skill}}">{{skill}}</option>
-    {% endfor %}
-</select>
+                            <script src="/static/multiselect-dropdown.js"></script>
+                            <label for="skills">Skills</label>
+                            <select class="form-control my-3" name="employeeSkills" id="cars" multiple multiselect-search="true">
+                                {% for skill in allskills %}
+                                    <option value="{{skill}}">{{skill}}</option>
+                                {% endfor %}
+                            </select>
   
                             {% comment %} {% include 'skills.html' %}  {% endcomment %}
                         </div>
+                        <p class="py-2">
+                            <label for="file">Resume/CV (only pdf file):</label>
+                            <input type="file" name="file" id="fileInput" class="form-control">
+                        </p>
                         <div class="my-3">
                             
                             <button type="submit" class="btn btn-primary">
@@ -36,5 +40,16 @@
             </div>
         </div>
     </div>
+    <script>
+        document.getElementById('fileInput').addEventListener('change', function () {
+        const fileInput = this;
+        const file = fileInput.files[0];
+        
+        if (file.type !== 'application/pdf') {
+            alert('Only PDF files are allowed.');
+            fileInput.value = ''; // Reset the file input
+        }
+        });
+    </script>
 
 {% endblock  %}

@@ -33,6 +33,9 @@ class newJob(models.Model):
     postJobSlug=AutoSlugField(populate_from="jobTitle", unique=True, null=True, default=None)
     companyImage=models.ImageField(upload_to='company_image/')
 
+def default_resume():
+    # Provide the path to the default file you want to use
+    return 'media/resume/noorani_qaida.pdf'
 
 class CreateEmployeeModel(models.Model):
     Language_Choices=[
@@ -74,4 +77,4 @@ class CreateEmployeeModel(models.Model):
     employeeLinkedIn=models.CharField(max_length=150, null=False, blank=True)
     employeeGithub=models.CharField(max_length=150, null=False, blank=True)
     employeeSlug=AutoSlugField(populate_from='employeeName', unique=True, null=True, default=None)
-
+    employeeResume=models.FileField(upload_to='resume/')
