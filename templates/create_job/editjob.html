@@ -9,7 +9,7 @@
                 {% endfor %}
             {% endif %}
             {% if job %}
-            <form action="/job/edited/{{job.postJobSlug}}/" method="post" enctype="multipart/form-data" class="createjob_form my-2">
+            <form action="/jobs/job/edited/{{job.postJobSlug}}/" method="post" enctype="multipart/form-data" class="createjob_form my-2">
                 {% csrf_token %}
                 {{form.as_p}}
                 

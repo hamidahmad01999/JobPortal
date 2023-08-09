@@ -1,1 +1,6 @@
 templates/create_job/dummy.html
+jobs/pdfviews.py
+media/static
+media/companyimages/
+media/employeeImages/
+media/resume/

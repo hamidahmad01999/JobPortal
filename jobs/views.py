@@ -60,10 +60,10 @@ def PostJob(request):
             
                 if(jobTitle=="" or jobDescription=="" or skillsRequirement=="" or experienceRequirement== "" or educationRequirement == "" or jobLocation=="" or salaryRange=="" or companyName=="" or companyDescription =="" or companyImage==None):
                     messages.error(request, "Please fill all the fileds.")
-                    return redirect('/createjob')
+                    return redirect('/jobs/createjob')
                 if(jobTitle==None or jobDescription==None or skillsRequirement==None or experienceRequirement== None or educationRequirement == None or jobLocation==None or salaryRange==None or companyName==None or companyDescription ==None or companyImage==None):
                         messages.error(request, "Please fill all the fileds.")
-                        return redirect('/createjob')
+                        return redirect('/jobs/createjob')
 
                 print(companyImage)
                 if is_Image(companyImage):
@@ -72,7 +72,7 @@ def PostJob(request):
                     result="Please only upload Image."
                     print(result)
                     messages.error(request, "Only upload valid Image.")
-                    return redirect('/createjob') 
+                    return redirect('/jobs/createjob') 
 
                 print(jobTitle, companyName, companyDescription, jobDescription, skillsRequirement,educationRequirement,
                 experienceRequirement,jobLocation,salaryRange, jobType,jobLevel, companyImage )
@@ -82,14 +82,14 @@ def PostJob(request):
                 print("it's going to save")
                 myPostJob.save()
                 messages.success(request, "Job Posted sucessfully.")
-                return redirect("/createjob")
+                return redirect("/jobs/createjob")
         print(form.errors)
         messages.error(request, "Job not Posted.")
-        return redirect("/createjob")
+        return redirect("/jobs/createjob")
     # except:
     #     print('excep error')
     #     messages.error(request, "Some kind of internal error.")
-    #     return redirect("/createjob")
+    #     return redirect("/jobs/createjob")
 
 #this function is to show the jobs where user can finds new and old jobs
 def ShowJobs(request):
@@ -117,7 +117,7 @@ def ShowJobs(request):
                 professionals=professionals.filter(Q(skillsRequirement__icontains=skills))
             
             if(not name and not address and not skills):
-                return redirect('/job')
+                return redirect('/jobs/job')
             result_num=professionals.count()
             return render(request, 'create_job/jobs.html', {'jobs':professionals, 'form':searchMenu,'total':result_num })
 
@@ -128,7 +128,7 @@ def ShowJobs(request):
         return render(request, "create_job/jobs.html", {'total':result_num,"jobs":jobs, 'form':searchMenu,'pages':[n+1 for n in range(pages)] })
     except:
         messages.error(request, "Some kind of internal error.")
-        return redirect("/createjob")
+        return redirect("/jobs/createjob")
 
 #this function can use to delete any existing jobd
 def DeleteJob(request, slug):
@@ -138,15 +138,15 @@ def DeleteJob(request, slug):
 
         if (not get_job):
             messages.error(request, "Job not found.")
-            return redirect("/createjob")
+            return redirect("/jobs/createjob")
 
         get_job.delete()
 
         messages.success(request, "Job Deleted sucessfully.")
-        return redirect("/createjob")
+        return redirect("/jobs/createjob")
     except:
         messages.error(request, "Some kind of internal error.")
-        return redirect("/createjob")
+        return redirect("/jobs/createjob")
 
 
 #this function is use to show the all details realted to job and redirect to showjobdetails page
@@ -158,10 +158,10 @@ def JobDetail(request, slug):
             return render(request, 'create_job/job_detail.html', {'job':get_job})
         else:
             messages.error(request, "This job does not exist.")
-            return redirect("/createjob")
+            return redirect("/jobs/createjob")
     except:
         messages.error(request, "Some kind of internal error.")
-        return redirect("/createjob")
+        return redirect("/jobs/createjob")
 
 #this function can use to show edit page of job detail of existing job
 def EditJob(request, slug):
@@ -174,10 +174,10 @@ def EditJob(request, slug):
             return render(request, 'create_job/editjob.html', {'form':form, "job":get_job})
         else:
             messages.error(request, "Professional details can not be load to edit now!")
-            return redirect('/createjob')
+            return redirect('/jobs/createjob')
     except:
         messages.error(request, "Some kind of internal error.")
-        return redirect("/createjob")
+        return redirect("/jobs/createjob")
     
 #this function will be used to edit the job
 def EditedJob(request, slug):
@@ -220,7 +220,7 @@ def EditedJob(request, slug):
                         result="Please only upload Image."
                         print(result)
                         messages.error(request, "Only upload valid Image.")
-                        return redirect('/createjob')   
+                        return redirect('/jobs/createjob')   
     
                     get_job.jobTitle=jobTitle
                     get_job.jobDescription=jobDescription
@@ -237,16 +237,16 @@ def EditedJob(request, slug):
                     get_job.save()
     
                     messages.success(request, "Job Updated sucessfully.")
-                    return redirect("/job")
+                    return redirect("/jobs/job")
         else:
             print(form.errors)
             print('eror')
             messages.error(request, "Job does not exist")
-            return redirect("/job")
+            return redirect("/jobs/job")
     except:
         print(form.errors)
         messages.error(request, "Fill all field Or Internal server error.")
-        return redirect("/job")
+        return redirect("/jobs/job")
     
 
 # this function will show the that page to user where he can create his profile to get job
@@ -295,30 +295,30 @@ def SaveEmployee(request):
                     result="Please only upload Image."
                     print(result)
                     messages.error(request, "Only upload valid Image.")
-                    return redirect('/createemployeeprofile')
+                    return redirect('/jobs/createemployeeprofile')
 
 
                 SaveEmployee= CreateEmployeeModel(employeeProfession=employeeProfession,employeeName=employeeName, employeeEmail=employeeEmail, employeePhone=employeePhone, employeeAddress=employeeAddress, employeeSkills=employeeSkills, employeeEducation=employeeEducation, employeeWorkExperience=employeeWorkExperience, employeeProfessionalSummary=employeeProfessionalSummary, employeeImage=employeeImage, employeeCity=employeeCity, employeeLanguages=employeeLanguages,employeeWorkExperienceYear=employeeWorkExperienceYear,employeeFacebook=employeeFacebook,employeeInstagram=employeeInstagram,employeeGithub=employeeGithub,employeeLinkedIn=employeeLinkedIn
                 ,employeeResume=employeeResume)
                 SaveEmployee.save()
                 messages.success(request, "Your profile created successfully.")
-                return redirect('/createemployeeprofile')
+                return redirect('/jobs/createemployeeprofile')
 
         print("Failed")
         print(form.errors)
         # form=CreateEmployeeProfile()
         messages.error(request, form.errors)
-        return redirect('/createemployeeprofile')
+        return redirect('/jobs/createemployeeprofile')
     except:
         print(form.errors)
         messages.error(request, "Internal Server Error.")
-        return redirect('/createemployeeprofile')
+        return redirect('/jobs/createemployeeprofile')
 
 #this function will get the profiles of all user and then display on professional page
 def Professionals(request):
     try:
         searchMenu=ProfessionalSearch() #get profiles of job seeker(users)
-        # result_num=searchMenu.count()
+        
         #it will be use to filter result in professionals
         if request.method=="POST":
             name = request.POST.get('searchProfessionalName')
@@ -354,7 +354,7 @@ def Professionals(request):
         return render(request, 'employee/professionals.html', {'data':data, 'form':searchMenu})                                                       
     except:
         messages.error(request, "Internal Server Error / No job seeker profile exists.")
-        return redirect('/createemployeeprofile')
+        return redirect('/jobs/createemployeeprofile')
 
 # this function will show the page which contain all details of job seeker(user)
 def ProfessionalDetails(request, slug):
@@ -366,10 +366,10 @@ def ProfessionalDetails(request, slug):
             return render(request, 'employee/professional_details.html', {'data':professionals})
         else:
             messages.error(request, "Professional details does not exist")
-            return redirect('/professionals')
+            return redirect('/jobs/professionals')
     except:
         messages.error(request, "Internal Server Error.")
-        return redirect('/createemployeeprofile')
+        return redirect('/jobs/createemployeeprofile')
     
 #it will show edit/update job seeker details page
 def EditProfessionalDetails(request,slug):
@@ -387,11 +387,11 @@ def EditProfessionalDetails(request,slug):
             return render(request, 'employee/professional_edit.html', {'form':form, "employee":get_employee,  'selectedskills':selected_skills, 'allskills':SoftSkills})
         else:
             messages.error(request, "Professional details can not be load to edit now!")
-            return redirect('/professionals')
+            return redirect('/jobs/professionals')
     except:
         
         messages.error(request, "Internal Server Error.")
-        return redirect('/createemployeeprofile')
+        return redirect('/jobs/createemployeeprofile')
     
 #it will edit/update job seeker profile
 def EditedProfessionalDetails(request,slug):
@@ -405,7 +405,7 @@ def EditedProfessionalDetails(request,slug):
                 print(employeeImage)
                 if employeeImage==None:
                     messages.error(request, "Please also upload your image.")
-                    return redirect(f'/professionals/edit/{slug}/')
+                    return redirect(f'/jobs/professionals/edit/{slug}/')
                 form=CreateEmployeeProfile(request.POST, request.FILES)
                 if form.is_valid():
                     print('form is valid')
@@ -433,7 +433,7 @@ def EditedProfessionalDetails(request,slug):
                         result="Please only upload Image."
                         print(result)
                         messages.error(request, "Only upload valid Image.")
-                        return redirect('/createemployeeprofile')
+                        return redirect('/jobs/createemployeeprofile')
 
 
                     get_employee.employeeName=employeeName
@@ -455,15 +455,15 @@ def EditedProfessionalDetails(request,slug):
                     get_employee.employeeLinkedIn=employeeLinkedIn
                     get_employee.save()
                     messages.success(request, "Your profile Updated successfully.")
-                    return redirect('/createemployeeprofile/')
+                    return redirect('/jobs/createemployeeprofile/')
         else:
             print(form.errors)
             messages.error(request, "Your profile not Updated.")
-            return redirect('/createemployeeprofile/')
+            return redirect('/jobs/createemployeeprofile/')
     except:
         print(form.errors)
         messages.error(request, "Internal Server Error.")
-        return redirect('/createemployeeprofile')
+        return redirect('/jobs/createemployeeprofile')
 
 def DeleteProfessional(request, slug):
     try:
@@ -471,7 +471,7 @@ def DeleteProfessional(request, slug):
         get_employee=CreateEmployeeModel.objects.get(employeeSlug=slug)
         get_employee.delete()
         messages.success(request, "Your profile deleted successfully.")
-        return redirect('/createemployeeprofile/')
+        return redirect('/jobs/createemployeeprofile/')
     except:
         messages.error(request, "Internal server error.")
-        return redirect('/createemployeeprofile/')
+        return redirect('/jobs/createemployeeprofile/')

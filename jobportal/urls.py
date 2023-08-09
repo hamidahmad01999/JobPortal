@@ -15,27 +15,16 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path,include
 from jobportal import views
-from jobs import createjob_views
+from jobs import pdfviews
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name="Home"),
-    path('createjob/', createjob_views.createJob, name='createjob'),
-    path('createjob/postjob', createjob_views.PostJob, name='postjob'),
-    path('job/', createjob_views.ShowJobs, name="jobs"),
-    path('job/delete/<slug>/', createjob_views.DeleteJob, name="deletejob"),
-    path('job/detail/<slug>/', createjob_views.JobDetail, name='jobdetail'),
-    path('job/edit/<slug>/', createjob_views.EditJob, name='editjob'),
-    path('job/edited/<slug>/', createjob_views.EditedJob, name='editedjob'),
-    path('createemployeeprofile/', createjob_views.EmployeeProfile, name="employeeprofile"),
-    path("saveemployee/", createjob_views.SaveEmployee, name="saveemployee"),
-    path('professionals/', createjob_views.Professionals, name='professionals'),
-    path('professionaldetails/<slug>/', createjob_views.ProfessionalDetails, name='profdetail'),
-    path('professionals/edit/<slug>/', createjob_views.EditProfessionalDetails, name='profdedit'),
-    path('professionals/edited/<slug>/', createjob_views.EditedProfessionalDetails, name='profdedited'),
-    path('professionals/delete/<slug>/', createjob_views.DeleteProfessional, name='profdelete'),
+    path('jobs/', include("jobs.urls")),
+    #pdf generation resume is extra feature I'm not going to push this on github
+    # path('pdf/<slug>/', pdfviews.generate_pdf_view) 
 ]
 from django.conf import settings
 from django.conf.urls.static import static

@@ -12,9 +12,9 @@
                 </form>
             </div>
             <div class="col-md-10 my-2">
-                <button style="width: 150px;" class="btn btn-secondary" id="filter_btn">Filter</button>
+                <button  style="max-width: 150px; min-width:90px" class="btn btn-secondary fltr-btn" id="filter_btn">Filter</button>
                 
-                <button style="width: 150px;" class="btn btn-secondary" id="filter_btn"><a href="/createjob" style="text-decoration: none; color: white;">Create Job</a></button>
+                <button  style="max-width: 150px; min-width:90px" class="btn btn-secondary fltr-btn" id="filter_btn"><a href="/jobs/createjob" style="text-decoration: none; color: white;">Create Job</a></button>
             </div>
             {% if messages %}
                 {% for message in messages %}
@@ -26,9 +26,9 @@
             {% endif %}
             {% if jobs %}
                 {% for job in jobs %}
-            <div class="col-md-3"  style="padding:20px">
+            <div class="col-md-6  col-lg-4 col-xl-3"  style="padding:20px">
                 <div class="row">
-                    <div class="col-12" style="border:2px solid black; position: relative; border-radius: 10px;
+                    <div class="" style="border:2px solid black; position: relative; border-radius: 10px;
                     box-shadow:5px 5px 3px rgba(0,0,0,0.3);
                     ">
                     <div class="d-flex align-items-center pt-2" style="display: flex;">
@@ -50,15 +50,15 @@
 
                     </div>
                     <div class="professional_address " style="display: flex; justify-content: space-between; align-items: center;">
-                        <p style="font-size: 15px;"><b>{{job.salaryRange}}$</b></p><button style="font-size: 14px;" class="btn btn-secondary"><a style="color: white; text-decoration: none;" href="/job/detail/{{job.postJobSlug}}/">View Details</a></button>
+                        <p style="font-size: 15px;"><b>{{job.salaryRange}}$</b></p><button style="font-size: 14px;" class="btn btn-secondary"><a style="color: white; text-decoration: none;" href="/jobs/job/detail/{{job.postJobSlug}}/">View Details</a></button>
                     </div>
                         <div  class="options">
                             <p   style="position:    absolute; top: 5px; ; right: 10px; transform: rotate(90deg);   cursor: potiner; margin: 5px;"><b style="cursor: pointer;  position: relative;">...</b>
                             <div class="options_detail" id="options_detail"     style="display: none; border-radius: 10px; padding: 10px;  position: absolute; top: 5px; right: 2px; background: grey; border: 1px solid black; z-index: 10;">
                                 <div class="" style="display: flex; flex-direction:column; padding: 5px 10px;" >
-                                    <a style="text-decoration: none; color: black; font-size: 14px;" href="/job/edit/{{job.postJobSlug}}/">Edit</a>
-                                    <a style="text-decoration: none; color: black; font-size: 14px;" href="/job/delete/{{job.postJobSlug}}">Delete</a>
-                                    <a style="text-decoration: none; color: black; font-size: 14px;" href="/job/detail/{{job.postJobSlug}}">Detail</a>
+                                    <a style="text-decoration: none; color: black; font-size: 14px;" href="/jobs/job/edit/{{job.postJobSlug}}/">Edit</a>
+                                    <a style="text-decoration: none; color: black; font-size: 14px;" href="/jobs/job/delete/{{job.postJobSlug}}">Delete</a>
+                                    <a style="text-decoration: none; color: black; font-size: 14px;" href="/jobs/job/detail/{{job.postJobSlug}}">Detail</a>
 
                                 </div>
                             </div>
@@ -77,30 +77,30 @@
                     <ul class="pagination">
                     {% if jobs.has_previous %}
                         <li class="page-item">
-                            <a class="page-link" href="/job/?page={{jobs.previous_page_number}}">Prev</a>
+                            <a class="page-link" href="/jobs/job/?page={{jobs.previous_page_number}}">Prev</a>
                         </li>
                         <li class="page-item">
-                            <a class="page-link" href="/job/?page=1">1</a>
+                            <a class="page-link" href="/jobs/job/?page=1">1</a>
                         </li>
                     {% else %}
                         <li class="page-item disabled">
                             <a class="page-link " href="">Prev</a>
                         </li>
                         <li class="page-item disabled">
-                            <a class="page-link " href="/job/?page=1">1</a>
+                            <a class="page-link " href="/jobs/job/?page=1">1</a>
                         </li>
                     {% endif %}
                     {% for i in pages %}
                         {% if i > 1 %}
                       <li class="page-item {% if data.number == i %} active{% endif %}">
-                        <a class="page-link" href="/job/?page={{i}}">{{i}}</a>
+                        <a class="page-link" href="/jobs/job/?page={{i}}">{{i}}</a>
                       </li>
                     {% endif %}
                     {% endfor %}
                       
                         {% if jobs.has_next %}
                       <li class="page-item">
-                        <a class="page-link" href="/job/?page={{jobs.next_page_number}}">Next</a>
+                        <a class="page-link" href="/jobs/job/?page={{jobs.next_page_number}}">Next</a>
                       </li>
                       {% else %}
                       <li class="page-item disabled">

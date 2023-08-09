@@ -1,0 +1,114 @@
+{% load filter %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Resume</title>
+</head>
+<body>
+    <div class="container d-flex justify-content-center mb-4">
+        <div class="col-md-10 col-lg-9" style="position: relative;">
+            
+            <h3 style="text-align: center;">Professional Resume</h3>
+            <div class="row" style="display: flex;justify-content: space-between;">
+                <div class="first_section_professional col-md-12 my-4" style=" display: flex;justify-content: space-between; align-items: center;">
+                    <div class="professional_personal_details_left d-flex   justify-content-start">
+                        <div class="professional_personal_details_info">
+                            <p style="font-size: 19px; padding-top: 2px;margin: 0px;"><b>   {{name}}</b></p>
+                            <p style="font-size: 14px; padding-top: 2px;margin: 0px;">{{profession}}</p>
+                            <p style="font-size: 12px; padding-top: 1px;margin: 0px;">{{city}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7 my-4">
+                    <p class="" style="margin: 5px 0px; padding: 5px;">
+                        <p style="font-size: 19px;"><b>About Me:</b></p>
+                        {{summary}}
+                    </p>
+                    <p class="" style="margin: 5px 0px; padding: 5px;">
+                        <p style="font-size: 19px;"><b>Work Experience:</b></p>
+                        {{workexperience}}
+                    </p>
+                    <p class="" style="margin: 5px 0px; padding: 5px;">
+                        <p style="font-size: 19px;"><b>Skills:</b></p>
+                        <b>{{skills|replace}}</b>
+                    </p>
+                    <p class="" style="margin: 5px 0px; padding: 5px;">
+                        <p style="font-size: 19px;"><b>Education:</b></p>
+                        {{education}}
+                    </p>
+                    <p class="" style="margin: 5px 0px; padding: 5px;">
+                        <p style="font-size: 19px;"><b>Address:</b></p>
+                        {{address}}
+                    </p>
+                </div>
+                <div class="third_section_professinal col-md-5 col-lg-4 my/-4" style=" border-radius: 10px;box-shadow: 5px 5px 5px rgba(0,0,0,0.2), -3px -3px 3px rgba(0,0,0,0.1); height:100%;">
+                    <h3 class="my-2" style=" width: 100%; ">Overview</h3>
+                    <div style="padding: 5px;" >
+                    
+                        <p style="margin-bottom: 5px;">Experience</p><p style="margin-right: 15px;margin-bottom: 5px;"><b>{{workexperienceyear}}</b></p>
+                    
+                    
+                        <p style="margin-bottom: 5px;">Education</p><p style="margin-right: 15px; margin-bottom: 5px;"><b>{{education}}</b></p>
+                    
+                        <p style="margin-bottom: 5px;">Languages</p><p style="margin-right: 15px; margin-bottom: 5px;">
+                            
+                            <b>{{language|replace}}</b>
+                            <!-- {{data.employeeLanguages|split:","}} -->
+                        </p>
+                    
+                        <p style="margin-bottom: 5px;">City</p><p style="margin-right: 15px; margin-bottom: 5px;"><b>{{city}}</b></p>
+                    
+                    </div>
+                    <div class="">
+                        <p>
+                            <!-- <p style="padding-right: 5px;display: inline;">Address:</p> -->
+                            {{address}}
+                        </p>
+                        <p>
+                            <p style="padding-right: 5px;display: inline;">Email:</p>{{email}}
+                        </p>
+                        <p>
+                            <p style="padding-right: 5px;display: inline;">Phone:</p>{{phone}}
+                        </p>
+                    </div>
+                    {% if facebook or instagram %}
+                    <h4 class="text-center">Connect with {{name}} On:</h4>
+                    <div class="employee_socailmedia " style="display: flex; flex-direction: column;">
+                        <div class="" style="display: flex; flex-direction: row;">
+                            {% if facebook %}
+                                <h4>Facebook:</h4>{{facebook}}
+                            {%endif%}
+
+                        </div>
+                        <div class="" style="display: flex; flex-direction: row;">
+                            {% if instagram %}
+                                <h4>Instagram:</h4>{{instagram}}
+                            {%endif%}
+
+                        </div>
+                        <div class="" style="display: flex; flex-direction: row;">
+                            {% if github %}
+                                <h4>Github:</h4>{{github}}
+                            {%endif%}
+
+                        </div>
+                        <div class="" style="display: flex; flex-direction: row;">
+
+                            {% if linkedIn %}
+                                <h4>LinkedIn:</h4>{{linkedIn}}
+                            {%endif%}
+                        </div>
+                    </div>
+                    {%endif%}
+                    <div style="display: flex; justify-content: center;">
+                        <p>Warning: This Resume is Computer Created so there can be some mistakes.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

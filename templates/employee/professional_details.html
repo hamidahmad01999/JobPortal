@@ -4,7 +4,7 @@
 
     <div class="container d-flex justify-content-center mb-4">
         <div class="col-md-10 col-lg-9" style="position: relative;">
-            <div class="back_btn mt-3" style="display: inline; position: absolute;left: 50px;"><a style="text-decoration: none;color: black;font-size: 20px; font-weight: bold;" href="/professionals/">&lt;Back</a></div>
+            <div class="back_btn mt-3" style="display: inline; position: absolute;left: 50px;"><a style="text-decoration: none;color: black;font-size: 20px; font-weight: bold;" href="/jobs/professionals/">&lt;Back</a></div>
             <h3 class='text-center'>Professional Detaills</h3>
             {% if data %}
             <div class="row" style="display: flex;justify-content: space-between;">
@@ -23,6 +23,10 @@
                         {% if data.employeeResume %}
                         <button style="font-size: 16px;" class="btn btn-secondary"><a   style="color: white; text-decoration: none;" href="/media/{{data.employeeResume}}" Download>Download CV</a></button>
                         {% endif %}
+                        {% comment %} {% else %}
+                        Please delete this line or don't uncomment this because I added this for my personal feature
+                        <button style="font-size: 16px;" class="btn btn-secondary"><a   style="color: white; text-decoration: none;" href="/pdf/{{data.employeeSlug}}" Download>Download CV</a></button>
+                        {% endif %} {% endcomment %}
                     </div>
                 </div>
                 <div class="col-md-7 my-4">
@@ -100,8 +104,8 @@
 
                 </div>
                 <button style="width: 150px; font-size: 19px; font-weight: bold;" class="btn btn-secondary py-2 py-2 mt-4 mx-1">Hire Me</button>
-                <button style="width: 150px; font-size: 19px; font-weight: bold;" class="btn btn-secondary py-2 py-2 mt-4 mx-1"><a style="text-decoration: none; color: white;" href="/professionals/delete/{{data.employeeSlug}}">Delete Me</a></button>
-                <button style="width: 150px; font-size: 19px; font-weight: bold;" class="btn btn-secondary py-2 py-2 mt-4 mx-1"><a style="text-decoration: none; color: white;" href="/professionals/edit/{{data.employeeSlug}}">Edit Me</a></button>
+                <button style="width: 150px; font-size: 19px; font-weight: bold;" class="btn btn-secondary py-2 py-2 mt-4 mx-1"><a style="text-decoration: none; color: white;" href="/jobs/professionals/delete/{{data.employeeSlug}}">Delete Me</a></button>
+                <button style="width: 150px; font-size: 19px; font-weight: bold;" class="btn btn-secondary py-2 py-2 mt-4 mx-1"><a style="text-decoration: none; color: white;" href="/jobs/professionals/edit/{{data.employeeSlug}}">Edit Me</a></button>
             </div>
             {% endif %}
         </div>

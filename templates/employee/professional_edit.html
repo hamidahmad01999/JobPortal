@@ -10,7 +10,7 @@
                         <h3>{{message}}</h3>
                     {% endfor %}
                 {% endif %}
-                <form action="/professionals/edited/{{employee.employeeSlug}}/" method="post" enctype="multipart/form-data">
+                <form action="/jobs/professionals/edited/{{employee.employeeSlug}}/" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{form.as_p}}
 

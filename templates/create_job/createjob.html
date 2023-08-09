@@ -9,7 +9,7 @@
                     <p>{{message}}</p>
                 {% endfor %}
             {% endif %}
-            <form action="/createjob/postjob" method="post" class="createjob_form my-2" enctype="multipart/form-data">
+            <form action="/jobs/createjob/postjob" method="post" class="createjob_form my-2" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{form.as_p}}
                 
